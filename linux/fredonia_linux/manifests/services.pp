@@ -11,6 +11,8 @@ class fredonia_linux::services () {
   }
   service { 'samba':
     ensure => running,
+    start  => '/usr/sbin/smbd service start',
+    stop   => '/usr/sbin/smbd service stop',
     enable => true,
   }
 
@@ -37,28 +39,23 @@ class fredonia_linux::services () {
   }
 
   #httpd running and enabled
-  package { 'snap':
-    ensure   => 'installed',
+  package { 'apache2':
+    ensure   => 'present',
     provider => 'apt',
-    before   => Exec['install http']
+    before   => Service['apache2']
   }
-  exec { 'install http':
-    command => 'sudo snap install http',
-    before  => Service['http'],
-    path    => '/usr/bin',
-  }
-  service { 'http':
+  service { 'apache2':
     ensure => running,
     enable => true,
   }
 
   #ntp running and enabled
-  package {
+  package { 'npt':
     ensure   => 'installed',
     provider => 'apt',
-    before   => Service['sntp'],
+    before   => Service['ntp'],
   }
-  service { 'sntp':
+  service { 'ntp':
     ensure => running,
     enable => true,
   }
