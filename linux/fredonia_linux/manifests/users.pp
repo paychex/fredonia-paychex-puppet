@@ -7,8 +7,8 @@ class fredonia_linux::users (String $user_name = '',
       ensure     => present,
       managehome => true,
       group      => $user_group,
-      password   => password_here,
-      ssh_key    => key_here,
+      #password   => password_here,
+      #ssh_key    => key_here,
     }
   }
 }
