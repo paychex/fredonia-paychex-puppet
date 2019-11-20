@@ -4,7 +4,7 @@ class fredonia_linux::services () {
   # to update log when services are run & track
   # for debugging 
   #Samba running and enabled
-  package {
+  package { 'samba':
     ensure   => 'installed',
     provider => 'apt',
     before   => Service['samba'],
@@ -50,7 +50,7 @@ class fredonia_linux::services () {
   }
 
   #ntp running and enabled
-  package { 'npt':
+  package { 'ntp':
     ensure   => 'installed',
     provider => 'apt',
     before   => Service['ntp'],
