@@ -8,7 +8,7 @@ class fredonia_windows::schedtask () {
     trigger   => [{
       'schedule'         => 'daily',
       'start_time'       => '00:00',
-      'minutes_interval' => '30'     # Causes the task to run every hour
+      'minutes_interval' => '30' 
     }],
   }
 }
