@@ -1,6 +1,6 @@
 class fredonia_windows::diskconfig () {
   file { 'c:/os_config':
-    ensure => 'directory',
+    ensure  => 'directory',
   }
   file { 'c:/os_config/diskscript.ps1':
     ensure => 'present',

@@ -3,11 +3,13 @@ class fredonia_linux::diskconfig () {
   package { 'parted':
     ensure => present,
   }
-  exec {'/usr/sbin/parted /dev/sdc mklabel msdos':
-    unless => '/sbin/blkid -t TYPE=ext4 /dev/sdc1'
+  exec {'/sbin/parted /dev/sdc mklabel msdos':
+    unless  => '/sbin/blkid -t TYPE=ext4 /dev/sdc1',
+    require => Package['parted'],
   }
-  exec {'/usr/sbin/parted /dev/sdc mkpart primary 1024KiB 100%':
-    unless => '/sbin/blkid -t TYPE=ext4 /dev/sdc1'
+  exec {'/sbin/parted /dev/sdc mkpart primary 1024KiB 100%':
+    unless  => '/sbin/blkid -t TYPE=ext4 /dev/sdc1',
+    require => Package['parted'],
   }
   exec {'/sbin/mkfs.ext4 /dev/sdc1':
     unless => '/sbin/blkid -t TYPE=ext4 /dev/sdc1'
