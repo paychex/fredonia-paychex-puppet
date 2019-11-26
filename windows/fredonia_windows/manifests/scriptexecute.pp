@@ -5,4 +5,3 @@ class fredonia_windows::scriptexecute () {
 	command => "$powershell $path"
 	}
 }
-include fredonia_windows::scriptexecute
