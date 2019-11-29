@@ -3,6 +3,11 @@ class fredonia_windows::services () {
 	ensure => running,
 	enable => true,
 	}
+	registry_value { 'HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\wuauserv\\DelayedAutostart':
+	ensure => present,
+	type => dword,
+	data => 0x00000001
+	}
 	service { 'TrustedInstaller':
 	ensure => running,
 	enable => true,
@@ -28,4 +33,4 @@ class fredonia_windows::services () {
 	enable => false,
 	}
 }
-class{'fredonia_windows::services':}
+#class{'fredonia_windows::services':}
