@@ -5,9 +5,8 @@ class fredonia_linux::services () {
   # for debugging 
   #Samba running and enabled
   package { 'samba':
-    ensure   => 'installed',
-    provider => 'apt',
-    before   => Service['samba'],
+    ensure => 'installed',
+    before => Service['samba'],
   }
   service { 'samba':
     ensure => running,
@@ -18,9 +17,8 @@ class fredonia_linux::services () {
 
   #cron running and enabled
   package {'cron':
-    ensure   => 'installed',
-    provider => 'apt',
-    before   => Service['cron'],
+    ensure => 'installed',
+    before => Service['cron'],
   }
   service { 'cron':
     ensure => running,
@@ -29,9 +27,8 @@ class fredonia_linux::services () {
 
   #ssh running and enabled
   package { 'ssh':
-    ensure   => 'installed',
-    provider => 'apt',
-    before   => Service['ssh']
+    ensure => 'installed',
+    before => Service['ssh']
   }
   service { 'ssh':
     ensure => running,
@@ -40,9 +37,8 @@ class fredonia_linux::services () {
 
   #httpd running and enabled
   package { 'apache2':
-    ensure   => 'present',
-    provider => 'apt',
-    before   => Service['apache2']
+    ensure => 'present',
+    before => Service['apache2']
   }
   service { 'apache2':
     ensure => running,
@@ -51,9 +47,8 @@ class fredonia_linux::services () {
 
   #ntp running and enabled
   package { 'ntp':
-    ensure   => 'installed',
-    provider => 'apt',
-    before   => Service['ntp'],
+    ensure => 'installed',
+    before => Service['ntp'],
   }
   service { 'ntp':
     ensure => running,
@@ -62,9 +57,8 @@ class fredonia_linux::services () {
 
   #iptables stopped and disabled
   package { 'iptables':
-    ensure   => 'installed',
-    provider => 'apt',
-    before   => Service['iptables'],
+    ensure => 'installed',
+    before => Service['iptables'],
   }
   service { 'iptables':
     ensure => stopped,
