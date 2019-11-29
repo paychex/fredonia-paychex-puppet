@@ -1,4 +1,8 @@
 class fredonia_linux::scriptexecute () {
+  #create directory
+  file { '/var/test/':
+    ensure => 'directory',
+  }
   #create file to which timestamp will be written
   file { '/var/test/date.txt':
     ensure => 'present',
