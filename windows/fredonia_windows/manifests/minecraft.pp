@@ -1,3 +1,59 @@
 class fredonia_windows::minecraft () {
-  #Filler
+  exec { 'Create firewall rule for mc server': 
+    path     => $::path, 
+    command  => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command \{netsh advfirewall firewall add rule name="Minecraft Server" dir=in action=allow protocol=TCP localport=25565}',
+    unless   => '',
+    provider => powershell,
+  }
+
+  #Create directory for java
+  file { 'C:\Program Files\Java':
+    ensure => 'directory',
+  }
+
+  #Create directory for minecraft
+  file { 'C:\Program Files\Java\minecraft':
+    ensure => 'directory',
+  }
+
+  #Download and unzip openjdk
+  file { "C:\Program Files\Java\openjdk.zip":
+    ensure => present,
+    source => "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_windows_hotspot_8u232b09.zip",
+  }
+
+  exec { 'Unzip openjdk files':
+    path     => $::path,
+    command  => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command \{Expand-Archive -LiteralPath C:\Program Files\Java\openjdk.zip -DestinationPath C:\Program Files\Java\ jdk}',
+    unless   => 'Test-Path C:\Program Files\Java\jdk',
+    provider => powershell,
+  }
+
+  #Download server jar
+  file { "C:\Program Files\Java\minecraft\server.jar":
+    ensure => present,
+    source => "https://launcher.mojang.com/v1/objects/3dc3d84a581f14691199cf6831b71ed1296a9fdf/server.jar",
+  }
+
+  #Accept eula
+  file
+  { 'C:\Program Files\Java\minecraft\eula.txt': content => 'eula=true', require => file[ 'C:\Program Files\Java\minecraft' ], }
+
+  #Lay down bat file for minecraft server
+  file { 'C:\Program Files\Java\minecraft\minecraft.bat':
+    ensure => 'present',
+    source => 'puppet:///modules/fredonia_windows/minecraft.bat',
+  }
+
+  exec { 'Create service for mc server':
+    path     => $::path,
+    command  => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command \{sc.exe create minecraft binPath="C:\Program Files\Java\minecraft\minecraft.bat"}',
+    unless   => '',
+    provider => powershell,
+  }
 }
+
+#  minecraft.bat:
+#  @ECHO OFF
+#  java -Xms1024M -Xmx1024M -jar minecraft_server.jar nogui
+#  pause
