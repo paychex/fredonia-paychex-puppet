@@ -3,8 +3,8 @@
 class fredonia_linux::minecraft () {
   exec { 'create firewall rule for mc server' :
   path    => ['/usr/bin', '/usr/sbin', '/bin'],
-  command => '/usr/bin/firewall-cmd --zone=public --add-port=25565/tcp --perman$
-  unless  => '/usr/bin/firewall-cmd --zone=public --list-ports | /bin/grep 2556$
+  command => '/usr/bin/firewall-cmd --zone=public --add-port=25565/tcp --permanent; /usr/bin/firewall-cmd --reload',
+  unless  => '/usr/bin/firewall-cmd --zone=public --list-ports | /bin/grep 25565',
   }
   #Install openjdk
   package { [ 'openjdk-8-jdk', ]:

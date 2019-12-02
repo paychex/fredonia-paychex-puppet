@@ -11,7 +11,7 @@ class fredonia_linux::diskconfig () {
     unless  => '/sbin/blkid -t TYPE=ext4 /dev/sdb1',
     require => Package['parted'],
   }
-  exec {'/sbin/mkfs.ext4 /dev/sdc1':
+  exec {'/sbin/mkfs.ext4 /dev/sdb1':
     unless => '/sbin/blkid -t TYPE=ext4 /dev/sdb1'
   }
   file { '/var/test':
