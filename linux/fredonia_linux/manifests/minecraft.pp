@@ -43,7 +43,7 @@ class fredonia_linux::minecraft () {
     mode    => '0644',
     owner   => 'root',
     group   => 'root',
-    source  => 'puppet:///modules/fredonia_linux/mcservicetemplate.svc',
+    source  => 'puppet:///modules/fredonia_linux/minecraftsvc',
   }
   #Ensure service is running
   service { 'minecraft':
@@ -52,17 +52,3 @@ class fredonia_linux::minecraft () {
     require => File['/etc/systemd/system/minecraft.service'],
   }
 }
-
-#Example service file:
-# Not sure where to put this in the modulepath so that puppet can
-# find it.
-[Unit]
-Description=Minecraft server
-After=network.target[Service]
-Type=simple
-User=mcuser
-WorkingDirectory=/opt/minecraft
-ExecStart=/usr/bin/java -Xmx1024M -Xms1024M -jar /opt/minecraft/server.jar nogui
-Restart=on-failure
-[Install]
-WantedBy=multi-user.target{code}
