@@ -60,7 +60,7 @@ echo ''
 #echo ''
 
 # change user
-sudo deluser
+sudo deluser guest
 sudo rm -R /home/guest
 # show user no longer present
 # show user home directory deleted
@@ -70,7 +70,7 @@ echo ''
 
 # stop/start services
 for s in ${services[@]}; do
-  if [ $s = 'iptables' ]; then
+  if [ $s = 'ufw' ]; then
     sudo service $s start
     sudo service $s status
   else
