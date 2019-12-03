@@ -1,5 +1,3 @@
-# not sure what this does but causes errors -> {code:java}
-
 class fredonia_linux::minecraft () {
   exec { 'create firewall rule for mc server' :
   path    => ['/usr/bin', '/usr/sbin', '/bin'],
