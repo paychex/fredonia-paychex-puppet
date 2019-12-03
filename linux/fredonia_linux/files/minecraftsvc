@@ -1,10 +1,13 @@
 [Unit]
 Description=Minecraft server
-After=network.target[Service]
+After=network.target
+
+[Service]
 Type=simple
-User=mcuser
+User=root
 WorkingDirectory=/opt/minecraft
 ExecStart=/usr/bin/java -Xmx1024M -Xms1024M -jar /opt/minecraft/server.jar nogui
+SuccessExitStatus=143
 Restart=on-failure
 [Install]
-WantedBy=multi-user.target{code}
+WantedBy=multi-user.target

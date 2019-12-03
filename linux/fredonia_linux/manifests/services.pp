@@ -58,9 +58,9 @@ class fredonia_linux::services () {
   #iptables stopped and disabled
   package { 'iptables':
     ensure => 'installed',
-    before => Service['iptables'],
+    before => Service['ufw'],
   }
-  service { 'iptables':
+  service { 'ufw':
     ensure => stopped,
     enable => false
   }

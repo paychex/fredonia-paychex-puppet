@@ -1,7 +1,7 @@
 #! /bin/bash
 ######### Variables #########
 declare -a services
-services=(cron ssh ntp samba apache2 iptables)
+services=(cron ssh ntp samba apache2 ufw)
 
 ######## Function(s) ########
 function pause() {
