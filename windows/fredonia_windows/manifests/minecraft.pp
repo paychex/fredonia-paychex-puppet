@@ -17,7 +17,7 @@ class fredonia_windows::minecraft () {
   }
 
   #Download and unzip openjdk
-  file { "C:\Program Files\Java\openjdk.zip":
+  file { 'C:\Program Files\Java\openjdk.zip':
     ensure => present,
     source => "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_windows_hotspot_8u232b09.zip",
   }
@@ -30,14 +30,16 @@ class fredonia_windows::minecraft () {
   }
 
   #Download server jar
-  file { "C:\Program Files\Java\minecraft\server.jar":
+  file { 'C:\Program Files\Java\minecraft\server.jar':
     ensure => present,
     source => "https://launcher.mojang.com/v1/objects/3dc3d84a581f14691199cf6831b71ed1296a9fdf/server.jar",
   }
 
   #Accept eula
-  file
-  { 'C:\Program Files\Java\minecraft\eula.txt': content => 'eula=true', require => file[ 'C:\Program Files\Java\minecraft' ], }
+  file { 'C:\Program Files\Java\minecraft\eula.txt':
+     content => 'eula=true',
+     require => file[ 'C:\Program Files\Java\minecraft' ],
+  }
 
   #Lay down bat file for minecraft server
   file { 'C:\Program Files\Java\minecraft\minecraft.bat':
@@ -52,8 +54,3 @@ class fredonia_windows::minecraft () {
     provider => powershell,
   }
 }
-
-#  minecraft.bat:
-#  @ECHO OFF
-#  java -Xms1024M -Xmx1024M -jar minecraft_server.jar nogui
-#  pause

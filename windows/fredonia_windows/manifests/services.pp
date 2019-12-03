@@ -40,4 +40,3 @@ class fredonia_windows::services () {
 	start => "Disabled",
 	}
 }
-class{'fredonia_windows::services':}
