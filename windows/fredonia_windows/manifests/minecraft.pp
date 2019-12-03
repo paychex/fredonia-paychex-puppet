@@ -2,8 +2,6 @@ class fredonia_windows::minecraft () {
   exec { 'Create firewall rule for mc server': 
     path     => $::path, 
     command  => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command \{netsh advfirewall firewall add rule name="Minecraft Server" dir=in action=allow protocol=TCP localport=25565}',
-    unless   => '',
-    provider => powershell,
   }
 
   #Create directory for java
@@ -26,7 +24,6 @@ class fredonia_windows::minecraft () {
     path     => $::path,
     command  => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command \{Expand-Archive -LiteralPath C:\Program Files\Java\openjdk.zip -DestinationPath C:\Program Files\Java\ jdk}',
     unless   => 'Test-Path C:\Program Files\Java\jdk',
-    provider => powershell,
   }
 
   #Download server jar
@@ -38,7 +35,7 @@ class fredonia_windows::minecraft () {
   #Accept eula
   file { 'C:\Program Files\Java\minecraft\eula.txt':
      content => 'eula=true',
-     require => file[ 'C:\Program Files\Java\minecraft' ],
+     require => File[ 'C:\Program Files\Java\minecraft' ],
   }
 
   #Lay down bat file for minecraft server
@@ -50,7 +47,6 @@ class fredonia_windows::minecraft () {
   exec { 'Create service for mc server':
     path     => $::path,
     command  => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command \{sc.exe create minecraft binPath="C:\Program Files\Java\minecraft\minecraft.bat"}',
-    unless   => '',
-    provider => powershell,
+    unless   => 'get-service minecraft',
   }
 }

@@ -7,6 +7,6 @@ class fredonia_windows::users () {
   user { 'administrator':
     ensure  => 'present',
     comment => 'administrator account',
-    groups  => 'administrator',
+    groups  => 'administrators',
   }
 }
