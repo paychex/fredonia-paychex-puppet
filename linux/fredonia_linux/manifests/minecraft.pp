@@ -50,4 +50,3 @@ class fredonia_linux::minecraft () {
     require => File['/etc/systemd/system/minecraft.service'],
   }
 }
-class {'fredonia_linux::minecraft':}
