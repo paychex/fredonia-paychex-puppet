@@ -12,7 +12,8 @@ class fredonia_windows::minecraft () {
   #Download and unzip openjdk
   file { 'C:\Program Files\Java\openjdk.zip':
     ensure => present,
-    source => "http://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_windows_hotspot_8u232b09.zip",
+    source => "https://download.java.net/java/GA/jdk13.0.1/cec27d702aa74d5a8630c65ae61e4305/9/GPL/openjdk-13.0.1_windows-x64_bin.zip",
+	require => File[ 'C:\Program Files\Java' ],
   }
 
   exec { 'Unzip openjdk files':
