@@ -2,7 +2,7 @@ class fredonia_windows::users () {
   user { 'guest':
     ensure  => 'present',
     comment => 'guest account',
-    groups  => 'guest',
+    groups  => 'guests',
   }
   user { 'administrator':
     ensure  => 'present',
