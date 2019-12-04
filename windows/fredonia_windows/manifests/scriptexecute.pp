@@ -10,7 +10,7 @@ class fredonia_windows::scriptexecute () {
 
   file{ 'C:\\fredonia-windows\\windows\\Time-Script.ps1':
     ensure => 'present',
-    source  => 'puppet:///modules/fredonia_windows/files/Time-Script.ps1',
+    source  => 'puppet:///modules/fredonia_windows/Time-Script.ps1',
   }
 
   exec{ 'script_execution':
