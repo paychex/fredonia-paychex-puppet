@@ -1,3 +1,12 @@
 class fredonia_windows::users () {
-  #Filler
+  user { 'guest':
+    ensure  => 'present',
+    comment => 'guest account',
+    groups  => 'guests',
+  }
+  user { 'administrator':
+    ensure  => 'present',
+    comment => 'administrator account',
+    groups  => 'administrators',
+  }
 }

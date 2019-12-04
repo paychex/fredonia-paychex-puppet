@@ -1,0 +1,1 @@
+Get-Date -Format HH:mm:ss > "./Time.txt"
