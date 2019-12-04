@@ -1,9 +1,4 @@
 class fredonia_windows::minecraft () {
-  exec { 'Create firewall rule for mc server': 
-    path     => $::path, 
-    command  => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command \{netsh advfirewall firewall add rule name="Minecraft Server" dir=in action=allow protocol=TCP localport=25565}',
-  }
-
   #Create directory for java
   file { 'C:\Program Files\Java':
     ensure => 'directory',
@@ -17,7 +12,7 @@ class fredonia_windows::minecraft () {
   #Download and unzip openjdk
   file { 'C:\Program Files\Java\openjdk.zip':
     ensure => present,
-    source => "https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_windows_hotspot_8u232b09.zip",
+    source => "http://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u232-b09/OpenJDK8U-jdk_x64_windows_hotspot_8u232b09.zip",
   }
 
   exec { 'Unzip openjdk files':

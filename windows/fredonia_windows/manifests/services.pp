@@ -14,12 +14,11 @@ class fredonia_windows::services () {
 	enable => true,
 	start => "Automatic",
 	}
-	service { 'msiserver':
+	service { 'Schedule':
 	ensure => running,
-	enable => true,
 	start => "Automatic",
 	}
-	service { 'W32Time':
+        service { 'W32Time':
 	ensure => running,
 	enable => true,
 	start => "Automatic",
