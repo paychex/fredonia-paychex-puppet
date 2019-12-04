@@ -18,7 +18,7 @@ class fredonia_windows::minecraft () {
   exec { 'Unzip openjdk files':
     path     => $::path,
     command  => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command {Expand-Archive -LiteralPath C:\Program Files\Java\openjdk.zip -DestinationPath C:\Program Files\Java\jdk}',
-    unless   => 'Test-Path C:\Program Files\Java\jdk',
+    unless   => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command Test-Path C:\Program Files\Java\jdk',
   }
 
   #Download server jar
