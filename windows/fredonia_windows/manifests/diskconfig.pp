@@ -4,7 +4,7 @@ class fredonia_windows::diskconfig () {
   }
   file { 'c:/os_config/diskscript.ps1':
     ensure => 'present',
-    source  => 'puppet:///modules/fredonia_windows/files/diskscript.ps1',
+    source  => 'puppet:///modules/fredonia_windows/diskscript.ps1',
   }
   exec { 'provision drive':
     path      => $::path,
