@@ -41,7 +41,7 @@ class fredonia_windows::minecraft () {
 
   exec { 'Create service for mc server':
     path     => $::path,
-    command  => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command \{sc.exe create minecraft binPath="C:\Program Files\Java\minecraft\minecraft.bat"}',
-    unless   => 'get-service minecraft',
+    command  => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command {sc.exe create minecraft binPath="C:\Program Files\Java\minecraft\minecraft.bat"}',
+    unless   => 'C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy Bypass -noprofile -Command get-service minecraft',
   }
 }
