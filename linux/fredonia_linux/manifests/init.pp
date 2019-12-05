@@ -18,7 +18,7 @@ class { 'fredonia_linux::diskconfig': }
 class { 'fredonia_linux::scriptexecute': }
 
 #Class for laying down minecraft server "application"
-class { 'fredonia_linux::minecraft': }
+#class { 'fredonia_linux::minecraft': }
 
 }
 

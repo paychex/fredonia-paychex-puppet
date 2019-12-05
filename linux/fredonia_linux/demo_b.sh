@@ -4,36 +4,46 @@ declare -a services
 services=(cron ssh ntp samba apache2 ufw)
 
 ######## Function(s) ########
+# pause execution of program until any key
+# is pressed
 function pause() {
   read -n 1 -r -s
 }
 
+# show state of targeted system services,
+# resources, etc.
 function show_changes() {
   for s in ${services[@]}; do
+    if [ $s = 'cron' ]; then
+      sudo service cron stop
+    fi
     sudo service $s status
+    pause
     echo ''
   done
   pause
+  clear
 
   echo -e "Date Script\n"
   sudo cat /var/test/date.txt
-  echo ''
   pause
+  clear
 
   # show disk mount status
-  sudo fdisk -l
-  echo ''
+  sudo df -h
   pause
+  clear
 
   # show user present and home directory
   id guest
   ls /home
   pause
+  clear
 
   # show minecraft status
-  sudo service minecraft status
-  echo ''
-  pause
+ # sudo service minecraft status
+ # pause
+ # clear
 }
 
 #############################
@@ -41,56 +51,61 @@ function show_changes() {
 
 # apply initial configuration
 sudo puppet apply /opt/puppetlabs/puppet/modules/fredonia_linux/init.pp
-echo ''
+pause
+clear
 
 # show status
 show_changes
-clear
 
 #-------- muck things up ---------#
 # remove date file
 sudo rm /var/test/date.txt
 ls /var/test
 pause
-echo ''
+clear
 
 # unmount disk
-#sudo unmount /dev/sdb1
-#pause
-#echo ''
+sudo umount /dev/sdb1
+pause
+clear
 
 # change user
 sudo deluser guest
 sudo rm -R /home/guest
-# show user no longer present
+echo ''
+
 # show user home directory deleted
 id guest
 ls /home
-echo ''
+pause
+clear
 
 # stop/start services
 for s in ${services[@]}; do
-  if [ $s = 'ufw' ]; then
+  if [ $s = 'ufw' ] || [ $s = 'cron' ]; then
     sudo service $s start
     sudo service $s status
   else
     sudo service $s stop
     sudo service $s status
   fi
+  pause
   echo ''
 done
 pause
-
-# stop/uninstall minecraft
-sudo service minecraft stop
-
-# uninstall minecraft
-
-pause
-
 clear
 
-echo 'Waiting for puppet to update ...'
+# stop/uninstall minecraft
+# sudo service minecraft stop
+
+# uninstall minecraft
+#
+#pause
+#clear
+
+echo -e 'Waiting for puppet to update ...\n'
+pause
+clear
 
 # wait for cronjob then,
 show_changes
