@@ -3,6 +3,6 @@ class fredonia_linux::cron () {
     command => '/opt/puppetlabs/puppet/bin/puppet apply --catalog --verbose /opt/puppetlabs/puppet/modules/fredonia_linux/init.pp',
     user    => root,
     hour    => '*',
-    minute  => '*/2',
+    minute  => '*/3',
   }
 }

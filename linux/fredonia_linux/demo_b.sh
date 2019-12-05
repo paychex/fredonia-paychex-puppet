@@ -25,6 +25,7 @@ function show_changes() {
   clear
 
   echo -e "Date Script\n"
+  ls /var/test
   sudo cat /var/test/date.txt
   pause
   clear
@@ -41,9 +42,9 @@ function show_changes() {
   clear
 
   # show minecraft status
- # sudo service minecraft status
- # pause
- # clear
+#  sudo service minecraft status
+#  pause
+#  clear
 }
 
 #############################
@@ -66,6 +67,7 @@ clear
 
 # unmount disk
 sudo umount /dev/sdb1
+sudo df -h
 pause
 clear
 
@@ -73,8 +75,6 @@ clear
 sudo deluser guest
 sudo rm -R /home/guest
 echo ''
-
-# show user home directory deleted
 id guest
 ls /home
 pause
@@ -94,14 +94,6 @@ for s in ${services[@]}; do
 done
 pause
 clear
-
-# stop/uninstall minecraft
-# sudo service minecraft stop
-
-# uninstall minecraft
-#
-#pause
-#clear
 
 echo -e 'Waiting for puppet to update ...\n'
 pause

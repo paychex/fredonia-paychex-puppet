@@ -10,8 +10,8 @@ class fredonia_linux::services () {
   }
   service { 'samba':
     ensure => running,
-    start  => '/usr/sbin/smbd service start',
-    stop   => '/usr/sbin/smbd service stop',
+    start  => 'sudo service smbd start',
+    stop   => 'sudo service smbd stop',
     enable => true,
   }
 
